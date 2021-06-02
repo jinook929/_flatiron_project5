@@ -1,10 +1,10 @@
-import Home from './components/Home'
+// For navbar
+import Navbar from './components/Navbar/Navbar'
 
 const App = () => {
-  console.log("App")
   return (
     <div className="App">
-      <Home />
+      <Navbar />
     </div>
   );
 }
