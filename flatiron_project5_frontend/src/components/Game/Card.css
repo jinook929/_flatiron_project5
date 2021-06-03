@@ -1,0 +1,24 @@
+.Card {
+  position: absolute;
+  top: 49%;
+  left: 0;
+  right: 0;
+  height: 50%;
+  margin: auto;
+
+  animation: fadeIn .5s;
+  opacity: .95;
+}
+
+@keyframes fadeIn {
+  from {
+  	opacity: 0;
+  }
+  to {
+ 	opacity: .95;
+  }
+}
+
+img {
+  width: 175px;
+}

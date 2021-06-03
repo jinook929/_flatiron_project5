@@ -1,6 +1,9 @@
-const reducers = (state = {user: null, highGames: []}, action) => {
+const reducers = (state = {user: null, highScores: []}, action) => {
   console.log("reducers state:", state)
   switch(action.type) {
+    case "FETCH_HIGH_SCORES":
+      return {...state, highScores: [...action.payload]}
+
     case "LOGIN_USER":
       return {...state, user: {...action.payload}}
 
@@ -12,6 +15,9 @@ const reducers = (state = {user: null, highGames: []}, action) => {
 
     case "RESET_USER":
       return {...state, user: null}
+
+    case "SET_USER":
+      return {...state, user: action.payload}
 
     default:
       return state

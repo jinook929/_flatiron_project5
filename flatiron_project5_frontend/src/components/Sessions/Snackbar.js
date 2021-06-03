@@ -34,8 +34,8 @@ export default function CustomizedSnackbars(props) {
   return (
     <div id="login-snackbar" className={classes.root}>
       <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="info">
-          {props.message}!
+        <Alert onClose={handleClose} severity={props.severity}>
+          {props.message}
         </Alert>
       </Snackbar>
     </div>

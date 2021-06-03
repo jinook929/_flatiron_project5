@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2021_06_01_024440) do
 
   create_table "games", force: :cascade do |t|
     t.integer "score"
-    t.string "memo"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

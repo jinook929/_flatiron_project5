@@ -21,8 +21,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  link: {
+    fontSize: 20,
+  },
   title: {
+    fontSize: 23,
     flexGrow: 1,
+    textAlign: 'left',
   },
   highScores: {
     marginRight: theme.spacing(5),
@@ -39,12 +44,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = () => {
   const user = useSelector(state => state.user)
-  console.log("Navbar Component", user)
   const history = useHistory()
   const dispatch = useDispatch()
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null);
+  const [page, setPage] = useState("/");
   const open = Boolean(anchorEl);
+  console.log("Navbar Component:", user, "pathname:", history.location.pathname)
 
   const handleNavbarItem = e => {
     setAnchorEl(e.currentTarget);
@@ -52,13 +58,15 @@ const Navbar = () => {
 
   const handleNavbarItemClick = route => {
     setAnchorEl(null);
+    setPage(route)
     history.push(route)
   }
 
   const handleLogoutClick = () => {
     if (window.confirm("Are you sure you want to log out?")) {
       setAnchorEl(null);
-      dispatch(logoutUser(user.id, history))
+      dispatch(logoutUser(sessionStorage.getItem("id"), history))
+      setPage("/")
     }
   }
   
@@ -69,10 +77,10 @@ const Navbar = () => {
           <IconButton color="inherit" onClick={() => handleNavbarItemClick("/")} variant="h6" className={`${classes.title} ${(history.location.pathname === "/") ? classes.activeNavBtn : ""}`}>
             The Higher Lower Game
           </IconButton>
-          <IconButton color="inherit" onClick={() => handleNavbarItemClick("/game")} style={{display: sessionStorage.getItem("jwt") ? "flex" : "none"}} className={(history.location.pathname === "/game") ? classes.activeNavBtn : ""}>
+          <IconButton color="inherit" onClick={() => handleNavbarItemClick("/game")} style={{display: sessionStorage.getItem("jwt") ? "flex" : "none"}} className={`${classes.link} ${(history.location.pathname === "/game") ? classes.activeNavBtn : ""}`}>
             Game
           </IconButton>
-          <IconButton color="inherit" onClick={() => handleNavbarItemClick("/high-scores")}  className={`${classes.highScores} ${(history.location.pathname === "/high-scores") ? classes.activeNavBtn : ""}`}>
+          <IconButton color="inherit" onClick={() => handleNavbarItemClick("/high-scores")}  className={`${classes.link} ${classes.highScores} ${(history.location.pathname === "/high-scores") ? classes.activeNavBtn : ""}`}>
             High Scores
           </IconButton>
           <div>
@@ -104,7 +112,7 @@ const Navbar = () => {
             >
               <MenuItem onClick={() => handleNavbarItemClick("/signup")} style={{display: !sessionStorage.getItem("jwt") ? "flex" : "none"}}>Sign Up</MenuItem>
               <MenuItem onClick={() => handleNavbarItemClick("/login")} style={{display: !sessionStorage.getItem("jwt") ? "flex" : "none"}}>Log In</MenuItem>
-              <MenuItem onClick={() => handleNavbarItemClick(`/users/${user.id}`)} style={{display: sessionStorage.getItem("jwt") ? "flex" : "none"}}>Profile</MenuItem>
+              <MenuItem onClick={() => handleNavbarItemClick(`/users/${sessionStorage.getItem("id")}`)} style={{display: sessionStorage.getItem("jwt") ? "flex" : "none"}}>Profile</MenuItem>
               <MenuItem onClick={() => handleLogoutClick("/")} style={{display: sessionStorage.getItem("jwt") ? "flex" : "none"}}>Log Out</MenuItem>
             </Menu>
           </div>

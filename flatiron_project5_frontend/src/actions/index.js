@@ -6,10 +6,17 @@ export const fetchDeck = () => {
 }
 
 export const fetchHighScores = () => {
-  return {
-    type: "FETCH_HIGH_SCORES",
-    payload: ""
+  return dispatch => {
+    fetch(`http://localhost:5000/high-scores`).then(res => res.json())
+    .then(data => {
+      console.log(data)
+      dispatch({
+        type: "FETCH_HIGH_SCORES",
+        payload: data
+      })
+    })
   }
+
 }
 
 export const addUser = (user, history) => {
@@ -17,10 +24,11 @@ export const addUser = (user, history) => {
     fetch(`http://localhost:5000/users`, {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({user: {email: user.email, password: user.password}})
+      body: JSON.stringify({user: {email: user.email.toLowerCase(), password: user.password}})
     }).then(res => res.json())
     .then(data => {
-      if(!data.user.message) {
+      if(data.user && !data.user.message) {
+        sessionStorage.setItem("id", data.user.id)
         sessionStorage.setItem("jwt", data.jwt)
         dispatch({type: "ADD_USER", payload: data.user})
         console.log("addUser", data.user)
@@ -40,10 +48,11 @@ export const loginUser = (user, history) => {
     fetch(`http://localhost:5000/login`, {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({user: {email: user.email, password: user.password}})
+      body: JSON.stringify({user: {email: user.email.toLowerCase(), password: user.password}})
     }).then(res => res.json())
     .then(data => {
       if(!data.user.message) {
+        sessionStorage.setItem("id", data.user.id)
         sessionStorage.setItem("jwt", data.jwt)
         dispatch({type: "LOGIN_USER", payload: data.user})
         history.push(`/users/${data.user.id}`)
@@ -74,4 +83,8 @@ export const logoutUser = (id, history) => {
 
 export const resetUser = () => {
   return {type: 'RESET_USER'}
+}
+
+export const setUser = (user) => {
+  return {type: 'SET_USER', payload: user}
 }
