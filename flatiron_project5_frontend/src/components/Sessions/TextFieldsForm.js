@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
-import { useHistory } from "react-router-dom"
+import {useHistory} from "react-router-dom"
 
-import {loginUser} from '../../actions'
+import {loginUser, addUser} from '../../actions'
 
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField'
+import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@material-ui/core/styles'
 import MyButton from '../Home/MyButton'
-import { Box, Typography } from '@material-ui/core';
+import {Box, Typography} from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,13 +17,13 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
-}));
+}))
 
 const TextFieldsForm = (props) => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const classes = useStyles();
+  const classes = useStyles()
   let [email, setEmail] = useState("")
   let [password, setPassword] = useState("")
 
@@ -31,14 +31,14 @@ const TextFieldsForm = (props) => {
     e.preventDefault()
     if(email && password) {
       console.log('Email:', email, 'Password:', password, "history:", history)
+      const user = {email, password}
       if(e.target.children[0].children[2].innerText === "LOG IN") {
-        const user = {email, password}
         dispatch(loginUser(user, history))
-        setEmail("")
-        setPassword("")
       } else {
-        alert("Sign up~~~")
+        dispatch(addUser(user, history))
       }
+      setEmail("")
+      setPassword("")
     }
   }
   
@@ -77,7 +77,7 @@ const TextFieldsForm = (props) => {
         </Box>
       </form>
     </Grid>
-  );
+  )
 }
 
 export default TextFieldsForm

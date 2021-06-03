@@ -61,7 +61,7 @@ export const Home = props => {
           <RuleLists />
         </Grid>
       </Paper>
-      <Grid container style={{display: !props.user ? "flex" : "none"}}>
+      <Grid container style={{display: (!props.user || props.user.message) ? "flex" : "none"}}>
         <MyButton onClick={() => handleButtonClick("/signup")} variant="contained" color="red" style={{marginLeft: "auto", marginTop: "20px"}}>Sign Up</MyButton>
         <MyButton onClick={() => handleButtonClick("/login")} variant="contained" color="blue" style={{marginRight: "auto", marginTop: "20px"}}>Log In</MyButton>
       </Grid>

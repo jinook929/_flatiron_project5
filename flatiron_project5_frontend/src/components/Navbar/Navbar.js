@@ -38,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Navbar = () => {
-  console.log("Navbar Component")
   const user = useSelector(state => state.user)
+  console.log("Navbar Component", user)
   const history = useHistory()
   const dispatch = useDispatch()
   const classes = useStyles()
@@ -69,7 +69,7 @@ const Navbar = () => {
           <IconButton color="inherit" onClick={() => handleNavbarItemClick("/")} variant="h6" className={`${classes.title} ${(history.location.pathname === "/") ? classes.activeNavBtn : ""}`}>
             The Higher Lower Game
           </IconButton>
-          <IconButton color="inherit" onClick={() => handleNavbarItemClick("/game")} style={{display: user ? "flex" : "none"}} className={(history.location.pathname === "/game") ? classes.activeNavBtn : ""}>
+          <IconButton color="inherit" onClick={() => handleNavbarItemClick("/game")} style={{display: sessionStorage.getItem("jwt") ? "flex" : "none"}} className={(history.location.pathname === "/game") ? classes.activeNavBtn : ""}>
             Game
           </IconButton>
           <IconButton color="inherit" onClick={() => handleNavbarItemClick("/high-scores")}  className={`${classes.highScores} ${(history.location.pathname === "/high-scores") ? classes.activeNavBtn : ""}`}>
@@ -102,10 +102,10 @@ const Navbar = () => {
               open={open}
               onClose={() => setAnchorEl(null)}
             >
-              <MenuItem onClick={() => handleNavbarItemClick("/signup")} style={{display: !user ? "flex" : "none"}}>Sign Up</MenuItem>
-              <MenuItem onClick={() => handleNavbarItemClick("/login")} style={{display:  !user ? "flex" : "none"}}>Log In</MenuItem>
-              <MenuItem onClick={() => handleNavbarItemClick(`/users/${user.id}`)} style={{display: user ? "flex" : "none"}}>Profile</MenuItem>
-              <MenuItem onClick={() => handleLogoutClick("/")} style={{display: user ? "flex" : "none"}}>Log Out</MenuItem>
+              <MenuItem onClick={() => handleNavbarItemClick("/signup")} style={{display: !sessionStorage.getItem("jwt") ? "flex" : "none"}}>Sign Up</MenuItem>
+              <MenuItem onClick={() => handleNavbarItemClick("/login")} style={{display: !sessionStorage.getItem("jwt") ? "flex" : "none"}}>Log In</MenuItem>
+              <MenuItem onClick={() => handleNavbarItemClick(`/users/${user.id}`)} style={{display: sessionStorage.getItem("jwt") ? "flex" : "none"}}>Profile</MenuItem>
+              <MenuItem onClick={() => handleLogoutClick("/")} style={{display: sessionStorage.getItem("jwt") ? "flex" : "none"}}>Log Out</MenuItem>
             </Menu>
           </div>
         </Toolbar>
