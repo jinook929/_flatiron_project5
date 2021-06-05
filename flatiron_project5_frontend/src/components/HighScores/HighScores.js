@@ -7,6 +7,7 @@ export class HighScores extends Component {
   componentDidMount() {
     this.props.fetchHighScores()
   }
+  
   render() {
     return (
       <div>

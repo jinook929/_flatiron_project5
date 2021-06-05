@@ -17,7 +17,7 @@ class GamesController < ApplicationController
   end
 
   def high_scores
-    games = Game.order(score: :desc)
+    games = Game.order(score: :desc, created_at: :desc).limit(20)
     render json: games
   end
 end

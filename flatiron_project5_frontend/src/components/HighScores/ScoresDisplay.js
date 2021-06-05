@@ -26,7 +26,6 @@ const ScoresDisplay = (props) => {
             <TableCell align="center">RANK</TableCell>
             <TableCell align="center">SCORE (When tied, recent score gets higher rank.)</TableCell>
             <TableCell align="center">PLAYER</TableCell>
-            {/* <TableCell align="right">MEMO</TableCell> */}
             <TableCell align="center">PLAYED_AT</TableCell>
           </TableRow>
         </TableHead>
@@ -36,7 +35,6 @@ const ScoresDisplay = (props) => {
               <TableCell align="center" component="th" scope="row"><strong>{i + 1}</strong></TableCell>
               <TableCell align="center"><strong>{name.score * 100}</strong> points</TableCell>
               <TableCell align="center">{name.user.email.split("@")[0].toUpperCase().split("").join("•")}</TableCell>
-              {/* <TableCell align="right">{name.memo}</TableCell> */}
               <TableCell align="center">{`${name.created_at.split('T')[0]} @ ${name.created_at.split('T')[1].slice(0, 11)}`}</TableCell>
             </TableRow>
           ))}

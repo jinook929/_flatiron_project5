@@ -1,4 +1,5 @@
 export const fetchDeck = () => {
+  console.log("actions fetchDeck")
   return {
     type: "FETCH_DECK",
     payload: ""
@@ -6,20 +7,41 @@ export const fetchDeck = () => {
 }
 
 export const fetchHighScores = () => {
+  console.log("actions fetchHighScores")
   return dispatch => {
     fetch(`http://localhost:5000/high-scores`).then(res => res.json())
     .then(data => {
-      console.log(data)
+      console.log("fetchHighScores fetched:", data)
       dispatch({
         type: "FETCH_HIGH_SCORES",
         payload: data
       })
     })
   }
+}
 
+export const fetchUser = (id) => {
+  console.log("actions fetchUser")
+  return dispatch => {
+    fetch(`http://localhost:5000/users/${id}`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
+      }
+    }).then(res => res.json())
+    .then(data => {
+      console.log("fetchUser fetched:", data)
+      dispatch({
+        type: "FETCH_USER",
+        payload: data
+      })
+    })
+  }
 }
 
 export const addUser = (user, history) => {
+  console.log("actions fetchHighScores", user)
   return dispatch => {
     fetch(`http://localhost:5000/users`, {
       method: "POST",
@@ -43,7 +65,7 @@ export const addUser = (user, history) => {
 }
 
 export const loginUser = (user, history) => {
-  console.log("action creator loginUser", user)
+  console.log("actions loginUser", user)
   return dispatch => {
     fetch(`http://localhost:5000/login`, {
       method: "POST",
@@ -64,7 +86,7 @@ export const loginUser = (user, history) => {
 }
 
 export const logoutUser = (id, history) => {
-  console.log("action creator logoutUser id:", id)
+  console.log("actions logoutUser id:", id)
   return dispatch => {
     fetch(`http://localhost:5000/logout/${id}`, {
     method: "DELETE",
@@ -82,9 +104,32 @@ export const logoutUser = (id, history) => {
 }
 
 export const resetUser = () => {
+  console.log("actions resetUser")
   return {type: 'RESET_USER'}
 }
 
 export const setUser = (user) => {
+  console.log("actions setUser", user)
   return {type: 'SET_USER', payload: user}
 }
+
+// export const refreshUserGames = (userId) => {
+//   console.log("actions setUser", userId)
+//   if(userId) {
+//     return dispatch => {
+//       fetch(`http://localhost:5000/users/${userId}`, {
+//         method: "GET",
+//         headers: {
+//           'Content-Type': 'application/json',
+//           "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
+//         }
+//       }).then(res => res.json())
+//       .then(data => {
+//         console.log("refreshUserGames", data)
+//         dispatch({type: 'REFRESH_USER_GAMES', payload: data})
+//         return
+//       })
+//     }
+//   }
+//   return {type: "DO_NOTHING"}
+// }

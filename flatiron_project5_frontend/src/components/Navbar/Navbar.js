@@ -37,8 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   activeNavBtn: {
     color: '#E0FFFF',
-    fontWeight: 'bold',
-    textDecoration: 'underline' 
+    // fontWeight: 'bold',
   }
 }))
 
@@ -50,23 +49,33 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [page, setPage] = useState("/");
   const open = Boolean(anchorEl);
-  console.log("Navbar Component:", user, "pathname:", history.location.pathname)
-
+  console.log("Navbar Component user:", user, "pathname:", history.location.pathname)
+  const [pathname, setPathname] = useState(history.location.pathname);
+  console.log("pathname in Navbar ===>", pathname)
+  
   const handleNavbarItem = e => {
+    console.log("Navbar handleNavbarItem e.currentTarget:", e.currentTarget);
+    // debugger
     setAnchorEl(e.currentTarget);
   }
 
   const handleNavbarItemClick = route => {
+    console.log("Navbar handleNavbarItemClick anchorEl:", anchorEl)
+    // debugger
     setAnchorEl(null);
     setPage(route)
     history.push(route)
     return page
   }
 
-  const handleLogoutClick = () => {
+  const handleLogoutClick = (e) => {
+    console.log("Navbar handleLogoutClick e.currentTarget:", e.currentTarget)
+    // debugger
     if (window.confirm("Are you sure you want to log out?")) {
-      setAnchorEl(null);
+      console.log("handleLogoutClick inside", e.currentTarget)
+      // debugger
       dispatch(logoutUser(sessionStorage.getItem("id"), history))
+      setAnchorEl(null);
     }
   }
   
@@ -119,12 +128,12 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
       <Switch>
-        <Route path="/" exact render={props => <Home {...props} />} />
+        <Route path="/" exact render={props => <Home {...props} setPathname={setPathname} />} />
         <Route path="/high-scores" render={props => <HighScores {...props} />} />
         <Route path="/game" render={props => <Game {...props} />} />
         <Route path="/signup" render={props => <Signup {...props} />} />
         <Route path="/login" render={props => <Login {...props} />} />
-        <Route path="/users/:id" render={props => <User {...props} />} />
+        <Route path="/users/:id" render={props => <User {...props} setPathname={setPathname} />} />
       </Switch>
     </div>
   )

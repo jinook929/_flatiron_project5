@@ -1,5 +1,5 @@
 // React related
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Route, Switch, useHistory} from 'react-router-dom'
 // Redux related
 import {connect} from 'react-redux'
@@ -35,12 +35,21 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export const Home = props => {
+  useEffect(() => {
+    // debugger
+    console.log("Home useEffect")
+    props.setPathname(props.history.location.pathname)
+  }, [])
+
   const classes = useStyles()
   const history = useHistory()
 
   const handleButtonClick = route => {
     history.push(route)
   }
+
+  console.log("Home user:", props.user)
+  console.log("Home pathname:", props.history.location.pathname)
 
   return (
     <div>

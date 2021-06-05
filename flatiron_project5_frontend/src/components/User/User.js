@@ -1,17 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import {fetchUser} from '../../actions'
 import ProfileCard from './ProfileCard'
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 export class User extends Component {
-  renderUserInfo = () => (this.props.user && this.props.user.id) ? 
+  componentDidMount() {
+    this.props.setPathname(this.props.history.location.pathname)
+    this.props.fetchUser(sessionStorage.getItem("id"))
+  }
+
+  renderUserInfo = () => {
+    // debugger
+    return (this.props.user && this.props.user.id) ? 
     <div>
       <ProfileCard user={this.props.user} />
     </div>
-  :
-    <div></div>
+    :
+    <div>Something's wrong...</div>
+  }
   
   render() {
+    console.log("User user", this.props.user)
     return (
       <div style={{textAlign: "center"}}>
         {
@@ -29,4 +39,10 @@ const mapStateToProps = (state) => ({
   user: state.user
 })
 
-export default connect(mapStateToProps)(User)
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchUser: (id) => dispatch(fetchUser(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(User)

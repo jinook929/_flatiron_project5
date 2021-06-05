@@ -19,6 +19,9 @@ const useStyles = makeStyles({
 const ProfileCard = (props) => {
   const classes = useStyles()
 
+  console.log("ProfileCard user", props.user)
+  console.log("ProfileCard games", props.user.games)
+
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
@@ -35,13 +38,16 @@ const ProfileCard = (props) => {
         <Typography variant="h5" component="h2">
           Games Played by This User
         </Typography>
+        <Typography className={classes.title} color="textSecondary">
+          Average Score : {Math.round(props.user.games.reduce((acc, el) => {return acc + el.score}, 0) * 100 / props.user.games.length)} points
+        </Typography>
         <Typography variant="body2" component="p">
           <br />
           {
             (props.user.games.length > 0) ? 
-            props.user.games.map(game => <p key={game.id}>{`${game.score * 100} points @ ${game.created_at.split("T")[0]}, ${game.created_at.split("T")[1].slice(0, 11)}`}</p>) 
+            [...props.user.games].reverse().map(game => <React.Fragment key={game.id}>{`${game.score * 100} points @ ${game.created_at.split("T")[0]}, ${game.created_at.split("T")[1].slice(0, 11)}`}<br /></React.Fragment>) 
             : 
-            <p>No game played yet. Click the Game link on the Navbar!</p>
+            <>No game played yet. Click the Game link on the Navbar!</>
           }
         </Typography>
       </CardContent>

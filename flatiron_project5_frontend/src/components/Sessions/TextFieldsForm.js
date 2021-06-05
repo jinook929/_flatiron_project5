@@ -30,7 +30,7 @@ const TextFieldsForm = (props) => {
   const handleFormSubmit = e => {
     e.preventDefault()
     if(email && password) {
-      console.log('Email:', email, 'Password:', password, "history:", history)
+      // console.log('TextFieldsForm handleFormSubmit =>', 'Email:', email, 'Password:', password, "history:", history)
       const user = {email, password}
       if(e.target.children[0].children[2].innerText === "LOG IN") {
         dispatch(loginUser(user, history))

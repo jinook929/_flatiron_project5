@@ -5,6 +5,7 @@ import TextFieldsForm from './TextFieldsForm'
 
 export const Signup = () => {
   const user = useSelector(state => state.user)
+  console.log("Signup user:", user)
   return (
     <div>
       {(user && user.message) ? <Snackbar message={user.message} severity="error" /> : <></>}

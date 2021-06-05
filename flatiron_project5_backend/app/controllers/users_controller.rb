@@ -6,6 +6,11 @@ class UsersController < ApplicationController
     render json: users
   end
 
+  def show
+    user = User.find_by(id: params[:id])
+    render json: {user: UserSerializer.new(user)}, status: :created
+  end
+
   def create
     if(params[:user][:email].match(/.+@.+\..+/))
       user = User.create(user_params)

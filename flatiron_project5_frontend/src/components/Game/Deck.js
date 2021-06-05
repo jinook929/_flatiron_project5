@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+// import {connect} from 'react-redux'
+// import {fetchHighScores} from '../../actions'
 
 import ScoreButton from './ScoreButton'
 import Card from './Card'
@@ -24,6 +26,8 @@ export class Deck extends Component {
   async persistGameResult(score, userId) {
     const res = await axios.post("http://localhost:5000/games", {score, userId})
     console.log(res.data)
+    // this.props.fetchHighScores()
+    // console.log(this.props.games)
   }
 
   getCardValue = (card) => {
@@ -103,14 +107,7 @@ export class Deck extends Component {
           console.log("CORRECT, HIGHER!")
         } else if(previousCardValue && currentCardValue < previousCardValue && decision === "LOWER") {
           console.log("CORRECT, LOWER!")
-        } 
-        // else if(previousCardValue) {
-        //   console.log("GAME OVER...", this.state.remaining)
-        //   console.log("Final Score:", this.state.drawn.length)
-        //   if (window.confirm(`Sorry, but the next card was NOT ${decision} [${card.suit} ${card.value}].\nDo you want to play another game?`)) {
-        //     this.componentDidMount()
-        //   }
-        // }
+        }
       } else {
         console.log("Congratularions!!! You've reached to the highest score.")
         if (window.confirm("Do you want to play another game?")) {
@@ -149,3 +146,17 @@ export class Deck extends Component {
 }
 
 export default Deck
+
+// const mapStateToProps = state => {
+//   return {
+//     games: state.games
+//   }
+// }
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     fetchHighScores: () => dispatch(fetchHighScores())
+//   }
+// }
+
+// export default connect(null, mapDispatchToProps)(Deck)
