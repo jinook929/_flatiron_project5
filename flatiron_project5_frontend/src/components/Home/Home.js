@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const Home = props => {
   useEffect(() => {
-    console.log("Home useEffect")
     props.setPathname(props.history.location.pathname)
   }, [props])
 
@@ -47,15 +46,12 @@ export const Home = props => {
     history.push(route)
   }
 
-  console.log("Home user:", props.user)
-  console.log("Home pathname:", props.history.location.pathname)
-
   return (
     <div>
       <Paper className={classes.paper}>
         <Grid item xs={12}>
           <div className={classes.image}>
-            <img className={classes.img} alt="complex" src="https://cdn.dribbble.com/users/1778225/screenshots/10868819/media/e2b74ca9e20aa7792bcb3974f715efe4.png" />
+            <img className={classes.img} alt="complex" src="/static/images/suits.webp" />
           </div>
         </Grid>
         <Grid item xs={12}>
