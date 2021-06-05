@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 import {Route, Switch, useHistory} from 'react-router-dom'
 // Redux related
-import {useSelector, useDispatch} from "react-redux"
+import {useDispatch} from "react-redux"
 import {logoutUser} from '../../actions' // for action creaters
 // Material UI ralated
 import { makeStyles } from '@material-ui/core/styles'
@@ -37,31 +37,24 @@ const useStyles = makeStyles((theme) => ({
   },
   activeNavBtn: {
     color: '#E0FFFF',
-    // fontWeight: 'bold',
+    fontWeight: 'bold',
   }
 }))
 
 const Navbar = () => {
-  const user = useSelector(state => state.user)
   const history = useHistory()
   const dispatch = useDispatch()
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null);
   const [page, setPage] = useState("/");
   const open = Boolean(anchorEl);
-  console.log("Navbar Component user:", user, "pathname:", history.location.pathname)
   const [pathname, setPathname] = useState(history.location.pathname);
-  console.log("pathname in Navbar ===>", pathname)
   
   const handleNavbarItem = e => {
-    console.log("Navbar handleNavbarItem e.currentTarget:", e.currentTarget);
-    // debugger
     setAnchorEl(e.currentTarget);
   }
 
   const handleNavbarItemClick = route => {
-    console.log("Navbar handleNavbarItemClick anchorEl:", anchorEl)
-    // debugger
     setAnchorEl(null);
     setPage(route)
     history.push(route)
@@ -69,13 +62,10 @@ const Navbar = () => {
   }
 
   const handleLogoutClick = (e) => {
-    console.log("Navbar handleLogoutClick e.currentTarget:", e.currentTarget)
-    // debugger
     if (window.confirm("Are you sure you want to log out?")) {
-      console.log("handleLogoutClick inside", e.currentTarget)
-      // debugger
-      dispatch(logoutUser(sessionStorage.getItem("id"), history))
       setAnchorEl(null);
+      dispatch(logoutUser(sessionStorage.getItem("id"), history))
+      return pathname
     }
   }
   
