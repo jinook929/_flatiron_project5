@@ -1,4 +1,6 @@
+// React related
 import React from 'react'
+// Material UI related
 import { makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -17,7 +19,6 @@ const useStyles = makeStyles({
 
 const ScoresDisplay = (props) => {
   const classes = useStyles()
-
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
