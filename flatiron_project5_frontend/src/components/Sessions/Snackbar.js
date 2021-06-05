@@ -1,8 +1,10 @@
-import React from 'react';
+// React & Redux related
+import React from 'react'
 import {useDispatch} from 'react-redux'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
+// Material UI related
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
+import { makeStyles } from '@material-ui/core/styles'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

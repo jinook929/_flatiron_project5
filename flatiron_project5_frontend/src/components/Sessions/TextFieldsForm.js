@@ -1,14 +1,14 @@
+// React & Redux related
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {useHistory} from "react-router-dom"
-
 import {loginUser, addUser} from '../../actions'
-
+// Material UI related
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
-import MyButton from '../Home/MyButton'
 import {Box, Typography} from '@material-ui/core'
+import MyButton from '../Home/MyButton'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 const TextFieldsForm = (props) => {
   const history = useHistory()
   const dispatch = useDispatch()
-
   const classes = useStyles()
   let [email, setEmail] = useState("")
   let [password, setPassword] = useState("")
@@ -30,7 +29,6 @@ const TextFieldsForm = (props) => {
   const handleFormSubmit = e => {
     e.preventDefault()
     if(email && password) {
-      // console.log('TextFieldsForm handleFormSubmit =>', 'Email:', email, 'Password:', password, "history:", history)
       const user = {email, password}
       if(e.target.children[0].children[2].innerText === "LOG IN") {
         dispatch(loginUser(user, history))

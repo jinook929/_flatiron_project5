@@ -61,7 +61,7 @@ const Navbar = () => {
     return page
   }
 
-  const handleLogoutClick = (e) => {
+  const handleLogoutClick = () => {
     if (window.confirm("Are you sure you want to log out?")) {
       setAnchorEl(null);
       dispatch(logoutUser(sessionStorage.getItem("id"), history))
