@@ -1,5 +1,4 @@
 const reducers = (state = {user: null, highScores: []}, action) => {
-  console.log("ENTERING reducers state:", state)
   switch(action.type) {
     case "FETCH_HIGH_SCORES":
       return {...state, highScores: [...action.payload]}

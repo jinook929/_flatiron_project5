@@ -36,10 +36,9 @@ const useStyles = makeStyles((theme) => ({
 
 export const Home = props => {
   useEffect(() => {
-    // debugger
     console.log("Home useEffect")
     props.setPathname(props.history.location.pathname)
-  }, [])
+  }, [props])
 
   const classes = useStyles()
   const history = useHistory()
