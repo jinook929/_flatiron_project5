@@ -39,7 +39,7 @@ const ProfileCard = (props) => {
           <br />
           {
             (props.user.games.length > 0) ? 
-            props.user.games.map(game => <p key={game.id}>{`${game.score} points (Memo: "${game.memo}") @ ${game.created_at.split("T")[0]}, ${game.created_at.split("T")[1].slice(0, 11)}`}</p>) 
+            props.user.games.map(game => <p key={game.id}>{`${game.score * 100} points @ ${game.created_at.split("T")[0]}, ${game.created_at.split("T")[1].slice(0, 11)}`}</p>) 
             : 
             <p>No game played yet. Click the Game link on the Navbar!</p>
           }

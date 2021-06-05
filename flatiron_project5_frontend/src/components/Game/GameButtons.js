@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,7 +21,6 @@ const GameButtons = (props) => {
   const classes = useStyles();
 
   const handleClick = (e) => {
-    console.log("handleClick", e.currentTarget.innerText)
     props.handleButtonClick(e.currentTarget.innerText)
   }
   return (

@@ -14,7 +14,6 @@ class SessionsController < ApplicationController
   def destroy
     logout_id = params[:id]
     user = User.find_by(id: logout_id)
-    # binding.pry
     render json: {user: UserSerializer.new(user)}
     # render json: {message: 'Successfully logged out'}
   end

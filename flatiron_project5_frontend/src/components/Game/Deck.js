@@ -21,6 +21,11 @@ export class Deck extends Component {
     this.handleButtonClick()
   }
 
+  async persistGameResult(score, userId) {
+    const res = await axios.post("http://localhost:5000/games", {score, userId})
+    console.log(res.data)
+  }
+
   getCardValue = (card) => {
     if(card) {
       let value
@@ -34,7 +39,7 @@ export class Deck extends Component {
         case "Q":
           value = 12
           break
-        case "k":
+        case "K":
           value = 13
           break
         case "A":
@@ -52,39 +57,43 @@ export class Deck extends Component {
           return value + 0.6
         case "S":
           return value + 0.8
+        default:
+          return 0
       }
     }
   }
 
   handleButtonClick = async (decision) => {
     if(this.state.remaining < 52) {
-      console.log("handleButtonClick:", decision)
+      console.log("handleButtonClick ln 63:", decision)
     }
 
     try {
       const res = await axios.get(`${BASE_URL}${this.state.deck.deck_id}/draw/?count=1`)
       const card = res.data.cards[0]
-      console.log("card", card)
+      console.log("card ln 69:", card)
       
       const previousCardValue = this.state.remaining < 52 ? this.getCardValue(this.state.drawn[this.state.drawn.length - 1]) : undefined
-      console.log("previousCardValue:", previousCardValue, "score", 52 - this.state.remaining)
+      console.log("previousCardValue ln72:", previousCardValue, "score ln 72:", 52 - this.state.remaining)
       
-      console.log("remaining", this.state.remaining)
+      console.log("remaining ln 74", this.state.remaining)
       
       const currentCardValue = this.getCardValue(card)
-      console.log("currentCardValue:", currentCardValue, "score", 52-this.state.remaining)
+      console.log("currentCardValue ln 77:", currentCardValue, "score", 52-this.state.remaining)
 
       if(res.data.success && this.state.remaining !== 1) {
 
         if(previousCardValue && !(currentCardValue > previousCardValue && decision === "HIGHER") && !(currentCardValue < previousCardValue && decision === "LOWER")) {
           console.log("GAME OVER...", this.state.remaining)
+          console.log("Final Score:", this.state.drawn.length - 1)
+
+          this.persistGameResult(this.state.drawn.length - 1, sessionStorage.getItem("id"))
+
           if (window.confirm(`Sorry, but the next card was NOT ${decision} [${card.suit} ${card.value}].\nDo you want to play another game?`)) {
             this.componentDidMount()
             return
           }
-          document.querySelectorAll(".MuiButton-root")[0].classList.add("Mui-disabled")
-          document.querySelectorAll(".MuiButton-root")[1].classList.add("Mui-disabled")
-          document.querySelectorAll(".MuiButton-root")[2].classList.add("Mui-disabled")
+          document.querySelectorAll(".MuiButton-root").forEach(el => el.classList.add("Mui-disabled"))
           return
         }
 
@@ -94,16 +103,19 @@ export class Deck extends Component {
           console.log("CORRECT, HIGHER!")
         } else if(previousCardValue && currentCardValue < previousCardValue && decision === "LOWER") {
           console.log("CORRECT, LOWER!")
-        } else if(previousCardValue) {
-          console.log("GAME OVER...", this.state.remaining)
-          if (window.confirm(`Sorry, but the next card was NOT ${decision} [${card.suit} ${card.value}].\nDo you want to play another game?`)) {
-            this.componentDidMount()
-          }
-        }
+        } 
+        // else if(previousCardValue) {
+        //   console.log("GAME OVER...", this.state.remaining)
+        //   console.log("Final Score:", this.state.drawn.length)
+        //   if (window.confirm(`Sorry, but the next card was NOT ${decision} [${card.suit} ${card.value}].\nDo you want to play another game?`)) {
+        //     this.componentDidMount()
+        //   }
+        // }
       } else {
         console.log("Congratularions!!! You've reached to the highest score.")
         if (window.confirm("Do you want to play another game?")) {
           this.componentDidMount()
+          return
         }
         throw new Error("No More Cards...\nYou won.")
       }

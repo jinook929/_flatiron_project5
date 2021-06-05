@@ -60,13 +60,13 @@ const Navbar = () => {
     setAnchorEl(null);
     setPage(route)
     history.push(route)
+    return page
   }
 
   const handleLogoutClick = () => {
     if (window.confirm("Are you sure you want to log out?")) {
       setAnchorEl(null);
       dispatch(logoutUser(sessionStorage.getItem("id"), history))
-      setPage("/")
     }
   }
   
