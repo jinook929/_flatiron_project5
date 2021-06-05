@@ -12,6 +12,7 @@ import SwapVertIcon from '@material-ui/icons/SwapVert'
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline'
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel'
 import Filter9PlusIcon from '@material-ui/icons/Filter9Plus'
+import BugReportIcon from '@material-ui/icons/BugReport'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,6 +66,14 @@ const RuleLists = () => {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Score" secondary="The number of correct answers is your score. The lowest score is 0 and the highest possible is 51. You can also check the high scores of other players." />
+        </ListItem>
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar>
+              <BugReportIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="in Game..." secondary="Sometimes the Deck of Cards API has a network issue. If that happens during the game, please click the HIGHER/LOWER button." />
         </ListItem>
       </List>
     </div>
