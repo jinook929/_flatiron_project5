@@ -1,8 +1,7 @@
+// React & Axios related
 import React, { Component } from 'react'
 import axios from 'axios'
-// import {connect} from 'react-redux'
-// import {fetchHighScores} from '../../actions'
-
+// files imported
 import ScoreButton from './ScoreButton'
 import Card from './Card'
 import GameButtons from './GameButtons'
@@ -24,10 +23,7 @@ export class Deck extends Component {
   }
 
   async persistGameResult(score, userId) {
-    const res = await axios.post("http://localhost:5000/games", {score, userId})
-    console.log(res.data)
-    // this.props.fetchHighScores()
-    // console.log(this.props.games)
+    axios.post("http://localhost:5000/games", {score, userId})
   }
 
   getCardValue = (card) => {
@@ -68,31 +64,16 @@ export class Deck extends Component {
   }
 
   handleButtonClick = async (decision) => {
-    if(this.state.remaining < 52) {
-      console.log("handleButtonClick ln 63:", decision)
-    }
-
     try {
       const res = await axios.get(`${BASE_URL}${this.state.deck.deck_id}/draw/?count=1`)
       const card = res.data.cards[0]
-      console.log("card ln 69:", card)
-      
-      const previousCardValue = this.state.remaining < 52 ? this.getCardValue(this.state.drawn[this.state.drawn.length - 1]) : undefined
-      console.log("previousCardValue ln72:", previousCardValue, "score ln 72:", 52 - this.state.remaining)
-      
-      console.log("remaining ln 74", this.state.remaining)
-      
       const currentCardValue = this.getCardValue(card)
-      console.log("currentCardValue ln 77:", currentCardValue, "score", 52-this.state.remaining)
-
+      const previousCardValue = this.state.remaining < 52 ? this.getCardValue(this.state.drawn[this.state.drawn.length - 1]) : undefined
+      // If fetching successful
       if(res.data.success && this.state.remaining !== 1) {
-
+        // If game over
         if(previousCardValue && !(currentCardValue > previousCardValue && decision === "HIGHER") && !(currentCardValue < previousCardValue && decision === "LOWER")) {
-          console.log("GAME OVER...", this.state.remaining)
-          console.log("Final Score:", this.state.drawn.length - 1)
-
           this.persistGameResult(this.state.drawn.length - 1, sessionStorage.getItem("id"))
-
           if (window.confirm(`Sorry, but the next card was NOT ${decision} [${card.suit} ${card.value}].\nDo you want to play another game?`)) {
             this.componentDidMount()
             return
@@ -100,17 +81,10 @@ export class Deck extends Component {
           document.querySelectorAll(".MuiButton-root").forEach(el => el.classList.add("Mui-disabled"))
           return
         }
-
+        // If game on
         this.setState(state => ({drawn: [...state.drawn, card], remaining: state.remaining - 1}))
-
-        if(previousCardValue && currentCardValue > previousCardValue && decision === "HIGHER") {
-          console.log("CORRECT, HIGHER!")
-        } else if(previousCardValue && currentCardValue < previousCardValue && decision === "LOWER") {
-          console.log("CORRECT, LOWER!")
-        }
-      } else {
-        console.log("Congratularions!!! You've reached to the highest score.")
-        if (window.confirm("Do you want to play another game?")) {
+      } else { // if error or all 52 cards drawn
+        if (window.confirm("Congratularions!!! You've reached to the highest score.\nDo you want to play another game?")) {
           this.componentDidMount()
           return
         }
@@ -146,17 +120,3 @@ export class Deck extends Component {
 }
 
 export default Deck
-
-// const mapStateToProps = state => {
-//   return {
-//     games: state.games
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     fetchHighScores: () => dispatch(fetchHighScores())
-//   }
-// }
-
-// export default connect(null, mapDispatchToProps)(Deck)
