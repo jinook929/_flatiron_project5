@@ -39707,3 +39707,18 @@ Processing by UsersController#show as */*
 Completed 201 Created in 10ms (Views: 6.2ms | ActiveRecord: 0.4ms | Allocations: 5540)
 
 
+Started DELETE "/logout/4" for ::1 at 2021-06-05 21:29:11 -0400
+Processing by SessionsController#destroy as */*
+  Parameters: {"id"=>"4", "session"=>{}}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/application_controller.rb:26:in `current_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:26:in `current_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:16:in `destroy'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:26:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.05ms)
+Completed 200 OK in 9ms (Views: 1.5ms | ActiveRecord: 0.4ms | Allocations: 5997)
+
+
