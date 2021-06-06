@@ -1,9 +1,11 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { makeStyles } from '@material-ui/core/styles';
+// React related
+import React from 'react'
+// Material UI related
+import Button from '@material-ui/core/Button'
+import ButtonGroup from '@material-ui/core/ButtonGroup'
+import { makeStyles } from '@material-ui/core/styles'
 import GetAppIcon from '@material-ui/icons/GetApp'
-import PublishIcon from '@material-ui/icons/Publish';
+import PublishIcon from '@material-ui/icons/Publish'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,11 +20,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GameButtons = (props) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   const handleClick = (e) => {
     props.handleButtonClick(e.currentTarget.innerText)
   }
+
   return (
     <div className={classes.root}>
       <ButtonGroup aria-label="outlined primary button group">
@@ -30,7 +33,7 @@ const GameButtons = (props) => {
         <Button color="secondary" onClick={handleClick}>Lower<GetAppIcon /></Button>
       </ButtonGroup>
     </div>
-  );
+  )
 }
 
 export default GameButtons
