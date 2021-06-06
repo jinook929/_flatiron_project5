@@ -90,9 +90,11 @@ by Jinook Jung
   belongs_to :user
 ```
 
-### Redux Store Structure
+### Redux Store Initial State
 
+``` javascript
 {user: null, highScores: []}
+```
 
 ## Contributing
 
