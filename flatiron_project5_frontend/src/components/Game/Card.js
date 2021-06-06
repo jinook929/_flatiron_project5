@@ -8,7 +8,7 @@ export class Card extends Component {
   render() {
     return (
       <div className="Card">
-        <img src={this.props.card.image} alt={this.props.card.code} style={{transform: this.state.transform}} />
+        <img src={this.props.card.image} alt={this.props.card.code} style={{marginTop: "100px", transform: this.state.transform}} />
       </div>
     )
   }

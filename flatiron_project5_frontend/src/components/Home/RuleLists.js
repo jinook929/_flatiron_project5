@@ -73,7 +73,7 @@ const RuleLists = () => {
               <BugReportIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="in Game..." secondary="Sometimes the Deck of Cards API has network issuea. If that happens during the game, please click the HIGHER/LOWER button one more time." />
+          <ListItemText primary="In Games..." secondary="Sometimes the Deck of Cards API has network issues. If that happens during the game, please click the HIGHER/LOWER button one more time." />
         </ListItem>
       </List>
     </div>
