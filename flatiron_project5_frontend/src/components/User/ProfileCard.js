@@ -1,8 +1,10 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+// React related
+import React from 'react'
+// Material UI related
+import { makeStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
   root: {
@@ -18,10 +20,6 @@ const useStyles = makeStyles({
 
 const ProfileCard = (props) => {
   const classes = useStyles()
-
-  console.log("ProfileCard user", props.user)
-  console.log("ProfileCard games", props.user.games)
-
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
@@ -52,7 +50,7 @@ const ProfileCard = (props) => {
         </Typography>
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export default ProfileCard

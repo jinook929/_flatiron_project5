@@ -1,3 +1,4 @@
+// React & Redux related
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import {fetchHighScores} from '../../actions'

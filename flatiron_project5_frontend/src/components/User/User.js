@@ -1,8 +1,10 @@
+// React & Redux related
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {fetchUser} from '../../actions'
 import ProfileCard from './ProfileCard'
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+// Material UI related
+import AccountBoxIcon from '@material-ui/icons/AccountBox'
 
 export class User extends Component {
   componentDidMount() {
@@ -11,7 +13,6 @@ export class User extends Component {
   }
 
   renderUserInfo = () => {
-    // debugger
     return (this.props.user && this.props.user.id) ? 
     <div>
       <ProfileCard user={this.props.user} />
@@ -21,7 +22,6 @@ export class User extends Component {
   }
   
   render() {
-    console.log("User user", this.props.user)
     return (
       <div style={{textAlign: "center"}}>
         {
