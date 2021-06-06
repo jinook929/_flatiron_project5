@@ -23,7 +23,12 @@ export class Deck extends Component {
   }
 
   async persistGameResult(score, userId) {
-    axios.post("http://localhost:5000/games", {score, userId})
+    axios.post("http://localhost:5000/games", {score, userId}, {
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
+      }
+    })
   }
 
   getCardValue = (card) => {
