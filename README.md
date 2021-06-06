@@ -12,10 +12,10 @@ by Jinook Jung
 
  `git clone https://github.com/jinook929/_flatiron_project5.git`.
 
-2. Enter into the *_flatiron_project5/_flatiron_project4_backend* folder: `cd _flatiron_project5/_flatiron_project4_backend`.
-3. Execute `bundle install` and run `rails s -p 5000` in terminal.
-4. In a new terminal, move to the directory, *_flatiron_project4/_flatiron_project4_frontend* folder: `cd _flatiron_project4/_flatiron_project4_frontend`.
-5. Then, open the `index.html` in your browser (*please avoid using live server*).
+2. Enter into the *_flatiron_project5/_flatiron_project5_backend* folder: `cd _flatiron_project5/_flatiron_project5_backend`.
+3. Execute `bundle install` and run `rails s -p 5000` in terminal. (If you want to reset database type `rails db:drop db:migrate db:seed`.)
+4. In a new terminal, move to the directory, *_flatiron_project4/_flatiron_project5_frontend* folder: `cd _flatiron_project4/_flatiron_project4_frontend`.
+5. Then, execute the `npm install`. When installing is finished, run `npm start` (*Note that you are automatically using port 3000 for frontend, whereas backend used 5000 above*).
 
 ## How To Use the App
 
