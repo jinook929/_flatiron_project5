@@ -12,57 +12,44 @@ by Jinook Jung
 
  `git clone https://github.com/jinook929/_flatiron_project5.git`.
 
-2. Enter into the *_flatiron_project5/_flatiron_project5_backend* folder: `cd _flatiron_project5/_flatiron_project5_backend`.
-3. Execute `bundle install` and run `rails s -p 5000` in terminal. (If you want to reset database type `rails db:drop db:migrate db:seed`.)
-4. In a new terminal, move to the directory, *_flatiron_project4/_flatiron_project5_frontend* folder: `cd _flatiron_project4/_flatiron_project4_frontend`.
+2. Enter into the *_flatiron_project5/flatiron_project5_backend* folder: `cd _flatiron_project5/flatiron_project5_backend`.
+3. Execute `bundle install` and run `rails s -p 5000` in terminal. (If you want to reset database, type `rails db:drop db:migrate db:seed`.)
+4. In a new terminal, move to the directory, *_flatiron_project5/flatiron_project5_frontend* folder: `cd _flatiron_project5/flatiron_project5_frontend`.
 5. Then, execute the `npm install`. When installing is finished, run `npm start` (*Note that you are automatically using port 3000 for frontend, whereas backend used 5000 above*).
 
 ## How To Use the App
 
-1. You can either sign up for your own account or use the existing accounts to log in (5 users are pre-set: `ann@email.com`, `lurk@email.com`, `eve@email.com`, `abc@email.com`, `zbf@email.com` [password for everyone is `123`]).
-2. Before logging in, user can see all the notices/comments.
-3. Each notice has its category (please refer to category keys above notice display area).
-4. After logging in, you can create new notices/comments, and edit or delete your own notices.
-5. Keyword search is available for any user (both *before* and *after* logging in) via the search box on the navbar.
-6. There are a couple of Easter Eggs, so try to find them~^^√
+1. You can either sign up for your own account or use the existing accounts to log in (2 users are pre-set: `user@users.com` & `abc@users.com` [password for both is `123`]).
+2. Before logging in, you can see the Rule(=Home) page and High Scores page, but cannot play games.
+3. After logging in, you can play game, and visit profile page to check the basic user info and previous game records (+ your average score). To visit the Profile page, just click the account icon on the top right corner of the screen and choose Profile.
+4. During the game, the Deck of Cards API could have network issues. Then, please just click the HIGHER/LOWER button one more time.
+5. This is a hard game. See if you can pass more than 10 guesses right (which is **1000 points**)!!!
 
 ## Screen Captures
 
-### Landing Page
+### Home Page
 
-![Landing Page](./_flatiron_project4_frontend/images/01_landing.png)
+![Home Page](./flatiron_project5_frontend/public/static/images/01_Home.jpeg)
 
-### Signup Modal
+### Signup Page
 
-![Signup Modal](./_flatiron_project4_frontend/images/02_signup_modal.png)
+![Signup Page](./flatiron_project5_frontend/public/static/images/02_Signup.jpeg)
 
-### Login Modal
+### Login Page
 
-![Login Modal](./_flatiron_project4_frontend/images/03_login_modal.png)
+![Login Page](./flatiron_project5_frontend/public/static/images/03_Login.jpeg)
 
-### New Notice Modal
+### High Scores Page
 
-![New Notice Modal](./_flatiron_project4_frontend/images/04_new_notice_modal.png)
+![High Scores Page](./flatiron_project5_frontend/public/static/images/04_HighScores.jpeg)
 
-### Notice Card (not owned)
+### Profile Page
 
-![Notice Card (not owned)](./_flatiron_project4_frontend/images/05_notice_card.png)
+![Profile Page](./flatiron_project5_frontend/public/static/images/05_Profile.jpeg)
 
-### Notice Card (owned)
+### Game Page
 
-![Notice Card (owned)](./_flatiron_project4_frontend/images/06_notice_card_owned.png)
-
-### Notice Card (editing mode)
-
-![Notice Card (editing mode)](./_flatiron_project4_frontend/images/07_notice_card_edit.png)
-
-### Search Function (found)
-
-![Search Function (found)](./_flatiron_project4_frontend/images/08_search.png)
-
-### Search Function (not found)
-
-![Search Function (not found)](./_flatiron_project4_frontend/images/09_search_not_found.png)
+![Game Page](./flatiron_project5_frontend/public/static/images/06_Game.jpeg)
 
 ## Data Structure
 
@@ -72,29 +59,16 @@ by Jinook Jung
 
 ``` ruby
   t.string :email
-  t.string :username
   t.string :password_digest
   ...
 ```
 
-#### notices
+#### games
 
 ``` ruby
-  t.string :title
-  t.string :description
-  t.string :category
+  t.integer :score
   t.integer :user_id
-  t.datetime :updated_at
-  ...
-```
-
-#### comments
-
-``` ruby
-  t.string :content
-  t.integer :notice_id
-  t.integer :user_id
-  t.string :username
+  t.datetime :created_at
   ...
 ```
 
@@ -103,35 +77,26 @@ by Jinook Jung
 #### User
 
 ``` ruby
-  has_many :notices, dependent: :destroy
-  has_many :comments, through: :notices
-
   has_secure_password
-  validates :email, presence: true
-  validates_uniqueness_of :email, :case_sensitive => false
+  has_many :games, dependent: :destroy
+  
+  validates_presence_of :email, :password_digest
+  validates :email, uniqueness: { case_sensitive: false }
 ```
 
-#### Notice
+#### Game
 
 ``` ruby
   belongs_to :user
-  has_many :comments, dependent: :destroy
-
-  validates_presence_of :title, :description, :category, :user_id
 ```
 
-#### Comment
+### Redux Store Structure
 
-``` ruby
-  belongs_to :notice
-  belongs_to :user
-
-  validates_presence_of :content, :user_id, :notice_id
-```
+{user: null, highScores: []}
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/jinook929/_flatiron_project4. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jinook929/_flatiron_project5. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 ## Contributors
 

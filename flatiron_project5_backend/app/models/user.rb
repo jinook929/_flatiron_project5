@@ -4,8 +4,4 @@ class User < ApplicationRecord
   
   validates_presence_of :email, :password_digest
   validates :email, uniqueness: { case_sensitive: false }
-
-  def username
-    puts self.email.split("@")[0]
-  end
 end
