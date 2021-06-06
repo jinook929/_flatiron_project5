@@ -1,7 +1,9 @@
+// React & Redux related
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Deck from './Deck'
+// Material UI related
 import LiveHelpIcon from '@material-ui/icons/LiveHelp'
+// other files
+import Deck from './Deck'
 import './Game.css'
 
 export class Game extends Component {
@@ -17,12 +19,4 @@ export class Game extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  
-})
-
-const mapDispatchToProps = {
-  
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Game)
+export default Game
