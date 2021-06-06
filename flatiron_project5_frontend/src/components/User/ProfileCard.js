@@ -37,7 +37,7 @@ const ProfileCard = (props) => {
           Games Played by This User
         </Typography>
         <Typography className={classes.title} color="textSecondary">
-          Average Score : {Math.round(props.user.games.reduce((acc, el) => {return acc + el.score}, 0) * 100 / props.user.games.length)} points
+          Average Score : {props.user.games.length > 0 ? Math.round(props.user.games.reduce((acc, el) => {return acc + el.score}, 0) * 100 / props.user.games.length) : 0} points
         </Typography>
         <Typography variant="body2" component="p">
           <br />
