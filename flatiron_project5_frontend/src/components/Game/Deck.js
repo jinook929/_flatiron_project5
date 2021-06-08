@@ -115,7 +115,7 @@ export class Deck extends Component {
     return (
       <div style={{textAlign: "center"}}>
         <p style={{fontSize: "0.75rem"}}>[ Remaing Cards: {this.state.remaining} ]</p>
-        <ScoreButton score={51 - this.state.remaining} />
+        <ScoreButton score={51 - this.state.remaining} handleButtonClick={this.handleButtonClick} />
         <br />
         {drawnCards}
         <GameButtons handleButtonClick={this.handleButtonClick} />

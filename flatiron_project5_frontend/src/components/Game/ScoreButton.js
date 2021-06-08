@@ -19,9 +19,15 @@ const useStyles = makeStyles((theme) => ({
 
 const ScoreButton = (props) =>  {
   const classes = useStyles();
+  const handleScoreButtonClick = e => {
+    if(props.score === -1) {
+      props.handleButtonClick()
+    }
+  }
+
   return (
     <div className={classes.root}>
-      <Button variant="outlined" color="default" className={classes.button}>
+      <Button variant="outlined" color="default" className={classes.button} onClick={handleScoreButtonClick}>
         Current Score: {props.score * 100}
       </Button>
     </div>

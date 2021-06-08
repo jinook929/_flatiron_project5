@@ -9,6 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import ScoreRow from './ScoreRow'
 
 const useStyles = makeStyles({
   table: {
@@ -28,16 +29,15 @@ const ScoresDisplay = (props) => {
             <TableCell align="center">SCORE (When tied, recent score gets higher rank.)</TableCell>
             <TableCell align="center">PLAYER</TableCell>
             <TableCell align="center">PLAYED_AT</TableCell>
+            {/* for live coding */}
+            {/* <TableCell align="center">Likes</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.games.map((name, i) => (
-            <TableRow key={name.id}>
-              <TableCell align="center" component="th" scope="row"><strong>{i + 1}</strong></TableCell>
-              <TableCell align="center"><strong>{name.score * 100}</strong> points</TableCell>
-              <TableCell align="center">{name.user.email.split("@")[0].toUpperCase().split("").join("•")}</TableCell>
-              <TableCell align="center">{`${name.created_at.split('T')[0]} @ ${name.created_at.split('T')[1].slice(0, 11)}`}</TableCell>
-            </TableRow>
+          {props.games.map((game, i) => (
+            <ScoreRow key={game.id} game={game} i={i} />
+            // for live coding
+            // <ScoreRow key={game.id} game={game} i={i} number={props.number} />
           ))}
         </TableBody>
       </Table>
