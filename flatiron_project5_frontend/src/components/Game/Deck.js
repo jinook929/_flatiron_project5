@@ -97,7 +97,7 @@ export class Deck extends Component {
       }
     } catch(err) {
       console.log("message:", err)
-      this.handleButtonClick()
+      this.handleButtonClick(decision)
     }
   }
 

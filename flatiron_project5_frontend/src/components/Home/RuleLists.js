@@ -65,15 +65,7 @@ const RuleLists = () => {
               <Filter9PlusIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Score" secondary="The number of correct answers is your score. The lowest score is 0 and the highest possible is 51. You can also check the high scores of other players." />
-        </ListItem>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <BugReportIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="In Games..." secondary="Sometimes the Deck of Cards API has network issues. If that happens during the game, please click the HIGHER/LOWER button one more time." />
+          <ListItemText primary="Score" secondary="The number of correct answers times 100 is your score. The lowest score is 0 and the highest possible is 5100. You can also check the high scores of other players." />
         </ListItem>
       </List>
     </div>
