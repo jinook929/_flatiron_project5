@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::API
   before_action :authorized
+  skip_before_action :authorized, only: [:home]
+
+  def home
+    render plain: "Please check the detailed routes ('/users' & '/games')."
+  end
 
   def encode_token(payload)
     JWT.encode(payload, Rails.application.credentials.secret_key_base)

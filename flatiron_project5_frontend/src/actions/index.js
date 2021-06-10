@@ -1,3 +1,6 @@
+// const RAILS_API = "https://higher-lower-api.herokuapp.com"
+const LOCAL_API = "http://localhost:5000"
+
 export const fetchDeck = () => {
   return {
     type: "FETCH_DECK",
@@ -7,7 +10,7 @@ export const fetchDeck = () => {
 
 export const fetchHighScores = () => {
   return dispatch => {
-    fetch(`http://localhost:5000/high-scores`).then(res => res.json())
+    fetch(`${LOCAL_API}/high-scores`).then(res => res.json())
     .then(data => {
       dispatch({
         type: "FETCH_HIGH_SCORES",
@@ -19,7 +22,7 @@ export const fetchHighScores = () => {
 
 export const fetchUser = (id) => {
   return dispatch => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`${LOCAL_API}/users/${id}`, {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -37,7 +40,7 @@ export const fetchUser = (id) => {
 
 export const addUser = (user, history) => {
   return dispatch => {
-    fetch(`http://localhost:5000/users`, {
+    fetch(`${LOCAL_API}/users`, {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({user: {email: user.email.toLowerCase(), password: user.password}})
@@ -58,7 +61,7 @@ export const addUser = (user, history) => {
 
 export const loginUser = (user, history) => {
   return dispatch => {
-    fetch(`http://localhost:5000/login`, {
+    fetch(`${LOCAL_API}/login`, {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({user: {email: user.email.toLowerCase(), password: user.password}})
@@ -78,7 +81,7 @@ export const loginUser = (user, history) => {
 
 export const logoutUser = (id, history) => {
   return dispatch => {
-    fetch(`http://localhost:5000/logout/${id}`, {
+    fetch(`${LOCAL_API}/logout/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

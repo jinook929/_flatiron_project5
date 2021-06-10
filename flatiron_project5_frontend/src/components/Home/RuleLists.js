@@ -12,7 +12,6 @@ import SwapVertIcon from '@material-ui/icons/SwapVert'
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline'
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel'
 import Filter9PlusIcon from '@material-ui/icons/Filter9Plus'
-import BugReportIcon from '@material-ui/icons/BugReport'
 
 const useStyles = makeStyles((theme) => ({
   root: {

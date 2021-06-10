@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/high-scores', to: 'games#high_scores'
   post '/login', to: 'sessions#create'
   delete '/logout/:id', to: 'sessions#destroy'
+  root 'application#home'
 end

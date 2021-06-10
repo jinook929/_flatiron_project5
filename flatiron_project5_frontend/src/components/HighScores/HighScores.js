@@ -23,7 +23,7 @@ export class HighScores extends Component {
           <input type="number" value={this.state.number} onChange={(e) => e.target.value < 1 ? "" : this.setState({number: e.target.value})} style={{textAlign: "center", fontSize: "1.5rem", width: 200}} />
         </div>
         {this.props.highScores.length > 0 ? <ScoresDisplay games={this.props.highScores} number={this.state.number} /> : <></>} */}
-        {this.props.highScores.length > 0 ? <ScoresDisplay games={this.props.highScores} /> : <>No Games Played at All!!!</>}
+        {this.props.highScores.length > 0 ? <ScoresDisplay games={this.props.highScores} /> : <h2 style={{textAlign: "center"}}>Game Records Are Loading...</h2>}
       </div>
     )
   }

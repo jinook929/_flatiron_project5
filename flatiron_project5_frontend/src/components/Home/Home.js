@@ -51,7 +51,7 @@ export const Home = props => {
       <Paper className={classes.paper}>
         <Grid item xs={12}>
           <div className={classes.image}>
-            <img className={classes.img} alt="complex" src="/static/images/suits.webp" />
+            <img className={classes.img} alt="complex" src="/static/images/suits.jpg" />
           </div>
         </Grid>
         <Grid item xs={12}>
