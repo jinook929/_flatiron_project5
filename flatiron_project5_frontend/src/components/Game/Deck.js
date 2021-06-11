@@ -80,7 +80,9 @@ export class Deck extends Component {
       if(res.data.success && this.state.remaining !== 1) {
         // If game over
         if(previousCardValue && !(currentCardValue > previousCardValue && decision === "HIGHER") && !(currentCardValue < previousCardValue && decision === "LOWER")) {
-          this.persistGameResult(this.state.drawn.length - 1, sessionStorage.getItem("id"))
+          if(this.state.remaining < 51) {
+            this.persistGameResult(this.state.drawn.length - 1, sessionStorage.getItem("id"))
+          }
           if (window.confirm(`Sorry, but the next card was NOT ${decision} [${card.suit} ${card.value}].\nDo you want to play another game?`)) {
             this.componentDidMount()
             return
